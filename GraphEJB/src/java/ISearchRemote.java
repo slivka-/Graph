@@ -5,5 +5,6 @@ import javax.ejb.Remote;
 @Remote
 public interface ISearchRemote
 {
-    public String Hello();
+    public void setGraphReference(IGraphRemote ref);
+    public int getNumOfConnectedComponents();
 }
