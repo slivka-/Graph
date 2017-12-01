@@ -66,7 +66,8 @@ public class AppClient
     
     private static void createGraph(int[] vertexes)
     {
-        
+        for (int i = 0; i<vertexes.length;i+=2)
+            graphRemote.addEgde(vertexes[i], vertexes[i+1]);
     }
     
     private static Boolean tryParseInt(String input)

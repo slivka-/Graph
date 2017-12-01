@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import javax.ejb.Remote;
 /**
  * @author Michał Śliwa
@@ -5,5 +6,7 @@ import javax.ejb.Remote;
 @Remote
 public interface IGraphRemote
 {
-    public String Hello();
+    public void addEgde(int from, int to);
+    public ArrayList<Integer> getVertextes();
+    public ArrayList<Integer> getNeighbouringVertexes(int vertex);
 }
