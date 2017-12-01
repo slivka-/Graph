@@ -1,0 +1,44 @@
+# Created by https://www.gitignore.io/api/java,netbeans
+
+### Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+GraphClient/hs_err_pid*
+GraphEJB/hs_err_pid*
+
+### NetBeans ###
+GraphClient/nbproject/private/
+GraphClient/build/
+GraphClient/nbbuild/
+GraphClient/dist/
+GraphClient/nbdist/
+GraphClient/.nb-gradle/
+
+GraphEJB/nbproject/private/
+GraphEJB/build/
+GraphEJB/nbbuild/
+GraphEJB/dist/
+GraphEJB/nbdist/
+GraphEJB/.nb-gradle/
+
+# End of https://www.gitignore.io/api/java,netbeans
