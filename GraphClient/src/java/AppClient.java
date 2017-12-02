@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 /**
@@ -12,19 +11,20 @@ import javax.naming.NamingException;
  */
 public class AppClient
 {
+    //Deployment descriptor for IGraphRemote
     private static final String GRAPHLOOKUP = "java:global/108222/Graph!IGraphRemote";
     
+    //Deployment descriptor for ISearchRemote
     private static final String SEARCHLOOKUP = "java:global/108222/Search!ISearchRemote";
     
     //remote bean representing graph
-    @EJB
     private static IGraphRemote graphRemote = null;
     
     //remote bean providing graph searching utility
-    @EJB
     private static ISearchRemote searchRemote = null;
     
     /**
+     * Main method
      * @param args 
      */
     public static void main(String[] args)
@@ -40,30 +40,37 @@ public class AppClient
         {
             try
             {
+                //create new Initial context
                 InitialContext ctx = new InitialContext();
+                //lookup for IGraphRemote
                 graphRemote = (IGraphRemote)ctx.lookup(GRAPHLOOKUP);
+                //lookup for ISearchRemote
                 searchRemote = (ISearchRemote)ctx.lookup(SEARCHLOOKUP);
             }
             catch(NamingException ex)
             {
+                //Print errors
                 System.out.println("Lookup error");
                 System.out.println(ex);
             }
             ArrayList<String> inputFileValues = new ArrayList<>();
             int[] vertextes = null;
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFilePath))))
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(inputFilePath))))
             {
                 //read file contents
                 String line;
-                while( (line = reader.readLine()) != null)
+                while ((line = reader.readLine()) != null)
                 {
-                    //split file contents by space and add individual values to list
+                    //split file contents by space and 
+                    //add individual values to list
                     String[] parts = line.split("\\ ");
                     inputFileValues.addAll(Arrays.asList(parts));
                 }
             }
             catch (IOException ex)
             {
+                //Print errors
                 System.out.println("Read Error!");
                 System.out.println(ex);
             }
@@ -80,7 +87,8 @@ public class AppClient
                         vertextes[i] = Integer.parseInt(inputFileValues.get(i));
                 }
             }
-            //if vertex table is not null and number of vertexes is divisable by 2
+            //if vertex table is not null and 
+            //number of vertexes is divisable by 2
             if (vertextes != null && vertextes.length % 2 == 0)
             {
                 //create graph structure
@@ -103,6 +111,7 @@ public class AppClient
      */
     private static void createGraph(int[] vertexes)
     {
+        //create edge for each 2 values in table
         for (int i = 0; i<vertexes.length;i+=2)
             graphRemote.addEgde(vertexes[i], vertexes[i+1]);
     }
@@ -116,11 +125,13 @@ public class AppClient
     {
         try
         {
+            //try to parse integer, then return true
             Integer.parseInt(input);
             return true;
         }
-        catch(NumberFormatException ex)
+        catch (NumberFormatException ex)
         {
+            //if parsing caused an error, return false
             return false;
         }
     }

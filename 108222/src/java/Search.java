@@ -67,7 +67,8 @@ public class Search implements ISearchRemote
             }
             //increase number of connected components in graph
             numOfComp++;
-        } 
+        }
+        //return number of connected components in graph
         return numOfComp;
     }
 }

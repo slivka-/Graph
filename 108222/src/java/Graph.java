@@ -23,14 +23,27 @@ public class Graph implements IGraphRemote
     {
         //check if vertex exist in graph
         if (graph.containsKey(v1))
-            graph.get(v1).add(v2);//add neighbour to vertex
+        {
+            //add neighbour to vertex
+            graph.get(v1).add(v2);
+        }
         else
-            graph.put(v1, new ArrayList<>(Arrays.asList(v2)));//add vertex with neighbour to graph
+        {
+            //add vertex with neighbour to graph
+            graph.put(v1, new ArrayList<>(Arrays.asList(v2)));
+        }
         
+        //check if vertex exist in graph
         if (graph.containsKey(v2))
+        {
+            //add neighbour to vertex
             graph.get(v2).add(v1);
+        }
         else
+        {
+            //add vertex with neighbour to graph
             graph.put(v2, new ArrayList<>(Arrays.asList(v1)));
+        }
     }
 
     /**
