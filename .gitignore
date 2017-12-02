@@ -34,11 +34,9 @@ GraphClient/dist/
 GraphClient/nbdist/
 GraphClient/.nb-gradle/
 
-GraphEJB/nbproject/private/
-GraphEJB/build/
-GraphEJB/nbbuild/
-GraphEJB/dist/
-GraphEJB/nbdist/
-GraphEJB/.nb-gradle/
-
-# End of https://www.gitignore.io/api/java,netbeans
+108222/nbproject/private/
+108222/build/
+108222/nbbuild/
+108222/dist/
+108222/nbdist/
+108222/.nb-gradle/
