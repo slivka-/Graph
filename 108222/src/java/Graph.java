@@ -22,12 +22,12 @@ public class Graph implements IGraphRemote
     public void addEgde(int v1, int v2)
     {
         //check if vertex exist in graph
-        if(graph.containsKey(v1))
+        if (graph.containsKey(v1))
             graph.get(v1).add(v2);//add neighbour to vertex
         else
             graph.put(v1, new ArrayList<>(Arrays.asList(v2)));//add vertex with neighbour to graph
         
-        if(graph.containsKey(v2))
+        if (graph.containsKey(v2))
             graph.get(v2).add(v1);
         else
             graph.put(v2, new ArrayList<>(Arrays.asList(v1)));
@@ -46,11 +46,14 @@ public class Graph implements IGraphRemote
     /**
      * Gets list of all vertextes neighbouring given vertex
      * @param vertex number of vertex
-     * @return list of neighbouring vertexes
+     * @return list of neighbouring vertexes or null
      */
     @Override
     public ArrayList<Integer> getNeighbouringVertexes(int vertex)
     {
-        return graph.get(vertex);
+        if (graph.containsKey(vertex))
+            return graph.get(vertex);
+        else
+            return null;
     }
 }

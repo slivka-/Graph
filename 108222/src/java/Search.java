@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.ejb.EJB;
@@ -30,26 +31,43 @@ public class Search implements ISearchRemote
     @Override
     public int getNumOfConnectedComponents()
     {
-        
+        //number of connected components in graph
         int numOfComp = 0;
         
+        //all vertextes in graph
         Set<Integer> vertextes = graphReference.getVertextes();
+        //vertextes currently to check
         Set<Integer> vertToCheck = new HashSet<>();
-        /*
-        while(!vertextes.isEmpty())
+        //checked vertexes
+        Set<Integer> removedVerts = new HashSet<>();
+        while (!vertextes.isEmpty())
         {
+            //get first vertex
             Integer currV = vertextes.iterator().next();
+            //add it to check set
             vertToCheck.add(currV);
-            while(!vertToCheck.isEmpty())
+            while (!vertToCheck.isEmpty())
             {
+               //get first vertex to check
                Integer currToCheck = vertToCheck.iterator().next();
-               vertToCheck.addAll(graphReference.getNeighbouringVertexes(currToCheck));
+               //get all of its neighbouring vertextes
+               ArrayList<Integer> neighbours;
+               neighbours = graphReference.getNeighbouringVertexes(currToCheck);
+               if (neighbours != null)
+               {
+                   //add all previously not checked vertextes to check
+                   neighbours.removeAll(removedVerts);
+                   vertToCheck.addAll(neighbours);
+               }
+               //add checked vertex to checked list
+               removedVerts.add(currToCheck);
+               //remove checked vertexes from list to check and from graph
                vertextes.remove(currToCheck);
                vertToCheck.remove(currToCheck);
             }
+            //increase number of connected components in graph
             numOfComp++;
         } 
-        */
         return numOfComp;
     }
 }
