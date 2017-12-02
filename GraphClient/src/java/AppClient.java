@@ -5,18 +5,24 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 /**
  * @author Michał Śliwa
  */
 public class AppClient
 {
+    private static final String GRAPHLOOKUP = "java:global/108222/Graph!IGraphRemote";
+    
+    private static final String SEARCHLOOKUP = "java:global/108222/Search!ISearchRemote";
+    
     //remote bean representing graph
     @EJB
-    private static IGraphRemote graphRemote;
+    private static IGraphRemote graphRemote = null;
     
     //remote bean providing graph searching utility
     @EJB
-    private static ISearchRemote searchRemote;
+    private static ISearchRemote searchRemote = null;
     
     /**
      * @param args 
@@ -32,6 +38,17 @@ public class AppClient
         //check if file path has been set
         if (inputFilePath!=null)
         {
+            try
+            {
+                InitialContext ctx = new InitialContext();
+                graphRemote = (IGraphRemote)ctx.lookup(GRAPHLOOKUP);
+                searchRemote = (ISearchRemote)ctx.lookup(SEARCHLOOKUP);
+            }
+            catch(NamingException ex)
+            {
+                System.out.println("Lookup error");
+                System.out.println(ex);
+            }
             ArrayList<String> inputFileValues = new ArrayList<>();
             int[] vertextes = null;
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFilePath))))

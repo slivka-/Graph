@@ -1,3 +1,5 @@
+import java.util.HashSet;
+import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 /**
@@ -28,7 +30,26 @@ public class Search implements ISearchRemote
     @Override
     public int getNumOfConnectedComponents()
     {
-        return 0;
+        
+        int numOfComp = 0;
+        
+        Set<Integer> vertextes = graphReference.getVertextes();
+        Set<Integer> vertToCheck = new HashSet<>();
+        /*
+        while(!vertextes.isEmpty())
+        {
+            Integer currV = vertextes.iterator().next();
+            vertToCheck.add(currV);
+            while(!vertToCheck.isEmpty())
+            {
+               Integer currToCheck = vertToCheck.iterator().next();
+               vertToCheck.addAll(graphReference.getNeighbouringVertexes(currToCheck));
+               vertextes.remove(currToCheck);
+               vertToCheck.remove(currToCheck);
+            }
+            numOfComp++;
+        } 
+        */
+        return numOfComp;
     }
-
 }

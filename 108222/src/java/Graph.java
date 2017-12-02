@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 import javax.ejb.Stateful;
 /**
  * Class representing a graph
@@ -33,13 +34,13 @@ public class Graph implements IGraphRemote
     }
 
     /**
-     * Gets list of all vertextes
-     * @return ArrayList of vertex numbers
+     * Gets set of all vertextes
+     * @return Set of vertex numbers
      */
     @Override
-    public ArrayList<Integer> getVertextes()
+    public Set<Integer> getVertextes()
     {
-        return new ArrayList<>(graph.keySet());
+        return graph.keySet();
     }
 
     /**
